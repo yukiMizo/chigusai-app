@@ -100,7 +100,7 @@ class HomeScreen extends ConsumerWidget {
     _init(ref);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("千種祭"),
+        title: const Text("第61回千種祭"),
         actions: [
           IconButton(
             onPressed: () => Navigator.of(context).pushNamed(NotificationScreen.routeName),

@@ -13,15 +13,24 @@ class TenjiDetailScreen extends StatelessWidget {
     final tenjiDetailData = ModalRoute.of(context)!.settings.arguments as TenjiDetailData;
     return Scaffold(
       appBar: AppBar(title: const Text("展示詳細")),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-        child: Column(children: [
-          ImageViewer(imgPath: tenjiDetailData.imgPath),
-          const SizedBox(height: 20),
-          Text(tenjiDetailData.hr),
-          Text(tenjiDetailData.title),
-          FilledButton(onPressed: () {}, child: const Text("マップ")),
-        ]),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            ImageViewer(imgPath: tenjiDetailData.imgPath),
+            const SizedBox(height: 20),
+            Text(
+              "${tenjiDetailData.hr}「${tenjiDetailData.title}」",
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              tenjiDetailData.pr,
+              style: const TextStyle(fontSize: 18),
+            ),
+            //  FilledButton(onPressed: () {}, child: const Text("マップ")),
+          ]),
+        ),
       ),
     );
   }

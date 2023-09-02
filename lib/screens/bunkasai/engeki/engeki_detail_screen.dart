@@ -60,28 +60,46 @@ class EngekiDetailScreen extends StatelessWidget {
     final bunkasaiDetailData = ModalRoute.of(context)!.settings.arguments as EngekiDetailData;
     return Scaffold(
       appBar: AppBar(title: const Text("演劇詳細")),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          ImageViewer(imgPath: bunkasaiDetailData.imgPath),
-          const SizedBox(height: 20),
-          Text(
-            "${bunkasaiDetailData.hr}「${bunkasaiDetailData.title}」",
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            "${bunkasaiDetailData.startTime.getDayAsString()}  ${bunkasaiDetailData.startTime.getTimeAsString()} 〜 ${bunkasaiDetailData.endTime.getTimeAsString()}",
-            style: const TextStyle(fontSize: 18),
-          ),
-          const SizedBox(height: 15),
-          Text(
-            bunkasaiDetailData.pr,
-            style: const TextStyle(fontSize: 18),
-          ),
-          FilledButton(onPressed: () => _showImage(context, bunkasaiDetailData.soukanImgPath), child: const Text("相関図")),
-          FilledButton(onPressed: () {}, child: const Text("マップ")),
-        ]),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            ImageViewer(imgPath: bunkasaiDetailData.imgPath),
+            const SizedBox(height: 20),
+            Text(
+              "${bunkasaiDetailData.hr}「${bunkasaiDetailData.title}」",
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              "日時：${bunkasaiDetailData.startTime.getDayAsString()}  ${bunkasaiDetailData.startTime.getTimeAsString()} 〜 ${bunkasaiDetailData.endTime.getTimeAsString()}",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 15),
+            Text(
+              bunkasaiDetailData.pr,
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              "相関図",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 5),
+            GestureDetector(
+              onTap: () => _showImage(context, bunkasaiDetailData.soukanImgPath),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(3))),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset(bunkasaiDetailData.soukanImgPath),
+              ),
+            ),
+
+            // FilledButton(onPressed: () => _showImage(context, bunkasaiDetailData.soukanImgPath), child: const Text("相関図")),
+            //FilledButton(onPressed: () {}, child: const Text("マップ")),
+          ]),
+        ),
       ),
     );
   }

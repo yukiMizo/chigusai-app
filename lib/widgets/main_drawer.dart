@@ -9,7 +9,7 @@ import '../bottom_navigation.dart';
 import '../screens/drawer/contact_screen.dart';
 import '../screens/drawer/information_screen.dart';
 import '../screens/drawer/login_screen.dart';
-import '../screens/drawer/pamphlet_screen.dart';
+//import '../screens/drawer/pamphlet_screen.dart';
 
 class MainDrawer extends ConsumerWidget {
   const MainDrawer({super.key});
@@ -21,7 +21,7 @@ class MainDrawer extends ConsumerWidget {
         const DrawerHeader(
           decoration: BoxDecoration(color: AppColors.themeColor),
           child: Text(
-            "千種祭",
+            "第61回千種祭",
             style: TextStyle(color: AppColors.lightText1, fontSize: 25),
           ),
         ),

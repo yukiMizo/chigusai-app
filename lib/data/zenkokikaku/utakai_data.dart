@@ -13,5 +13,9 @@ class UtakaiDetailData {
 class UtakaiData {
   static const List<UtakaiDetailData> utakaiDataList = [
     UtakaiDetailData(title: "ディズニー", pr: "", imgPath: "assets/images/zenkou/101.jpg"),
+    UtakaiDetailData(title: "ディズニー", pr: "", imgPath: "assets/images/zenkou/101.jpg"),
+    UtakaiDetailData(title: "ディズニー", pr: "", imgPath: "assets/images/zenkou/101.jpg"),
+    UtakaiDetailData(title: "ディズニー", pr: "", imgPath: "assets/images/zenkou/101.jpg"),
+    UtakaiDetailData(title: "ディズニー", pr: "", imgPath: "assets/images/zenkou/101.jpg"),
   ];
 }

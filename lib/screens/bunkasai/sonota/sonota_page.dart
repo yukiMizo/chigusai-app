@@ -9,7 +9,14 @@ class SonotaPage extends StatelessWidget {
     return Card(
       child: Column(
         children: [
-          Image(image: AssetImage(eventMerchandiseDetailData.imgPath)),
+          Container(
+            width: double.infinity,
+            height: 90,
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+            clipBehavior: Clip.antiAlias,
+            child: Image.asset(eventMerchandiseDetailData.imgPath),
+          ),
           Text(eventMerchandiseDetailData.title),
           Text("${eventMerchandiseDetailData.price}円"),
         ],
@@ -22,10 +29,10 @@ class SonotaPage extends StatelessWidget {
     const String saikoshiInfo = SonotaData.saikoshiInfo;
     const List<EventMerchandiseDetailData> eventMerchandiseList = SonotaData.eventMerchandiseList;
     const String chigumaInfo = SonotaData.chigumaInfo;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-      child: Scrollbar(
-        child: SingleChildScrollView(
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,7 +47,7 @@ class SonotaPage extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 10,
-                  crossAxisCount: 3,
+                  crossAxisCount: 2,
                 ),
                 itemCount: eventMerchandiseList.length,
                 itemBuilder: (context, index) {

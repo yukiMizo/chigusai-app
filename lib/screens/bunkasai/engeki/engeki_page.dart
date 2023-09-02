@@ -17,7 +17,9 @@ class EngekiPage extends StatelessWidget {
           leading: Container(
             width: 100,
             height: 60,
-            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage(engekiDetailData.imgPath))),
+            decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5))),
+            clipBehavior: Clip.antiAlias,
+            child: Image.asset(engekiDetailData.imgPath),
           ),
           title: Text(
             "${engekiDetailData.hr}「${engekiDetailData.title}」",

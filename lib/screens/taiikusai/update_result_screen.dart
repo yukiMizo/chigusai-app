@@ -258,7 +258,7 @@ class _UpdateResultScreenState extends State<UpdateResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<TaiikusaiDetailData> taiikusaiDataList = [...TaiikusaiData.taiikusaiDataList];
+    List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.getTaiikusaiDataList;
     taiikusaiDataList.removeWhere((data) => data.showResult == false);
     if (_isInit) {
       _loadData();

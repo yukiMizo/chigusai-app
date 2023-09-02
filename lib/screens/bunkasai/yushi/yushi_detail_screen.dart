@@ -13,27 +13,30 @@ class YushiDetailScreen extends StatelessWidget {
     final yushiDetailData = ModalRoute.of(context)!.settings.arguments as YushiDetailData;
     return Scaffold(
       appBar: AppBar(title: const Text("有志詳細")),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          ImageViewer(imgPath: yushiDetailData.imgPath),
-          const SizedBox(height: 20),
-          Text(
-            yushiDetailData.title,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              ImageViewer(imgPath: yushiDetailData.imgPath),
+              const SizedBox(height: 20),
+              Text(
+                yushiDetailData.title,
+                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                "日時：${yushiDetailData.startTime.getDayAsString()}  ${yushiDetailData.startTime.getTimeAsString()}〜",
+                style: const TextStyle(fontSize: 18),
+              ),
+              Text(
+                "場所：${yushiDetailData.place}",
+                style: const TextStyle(fontSize: 18),
+              ),
+              // FilledButton(onPressed: () {}, child: const Text("マップ")),
+            ]),
           ),
-          const SizedBox(height: 5),
-          Text(
-            "${yushiDetailData.startTime.getDayAsString()}  ${yushiDetailData.startTime.getTimeAsString()}",
-            style: const TextStyle(fontSize: 18),
-          ),
-          const SizedBox(height: 15),
-          Text(
-            yushiDetailData.pr,
-            style: const TextStyle(fontSize: 18),
-          ),
-          FilledButton(onPressed: () {}, child: const Text("マップ")),
-        ]),
+        ),
       ),
     );
   }

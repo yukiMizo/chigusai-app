@@ -28,7 +28,7 @@ class TaiikusaiShiftScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
+    List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.getTaiikusaiDataList;
     return Scaffold(
       appBar: AppBar(title: const Text("体育祭シフト")),
       body: Scrollbar(

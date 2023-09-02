@@ -5,6 +5,9 @@ import '../local_data.dart';
 final isLoggedInStudentProvider = StateProvider<bool>((ref) => false);
 final isLoggedInStaffProvider = StateProvider<bool>((ref) => false);
 final isLoggedInAdminProvider = StateProvider<bool>((ref) => false);
+final canChangeKomi = StateProvider<bool>(
+  (ref) => (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff || ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin),
+);
 
 final currentLoginStatusProvider = StateProvider<CurrentLoginStatus>((ref) => CurrentLoginStatus.notLoggedIn);
 
