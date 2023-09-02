@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:chigusai_app/data/taiikusai_data.dart';
 
 import 'taiikusai_shift_card.dart';
 
-class TaiikusaiShiftScreen extends StatelessWidget {
+class TaiikusaiShiftScreen extends StatefulWidget {
   static const routeName = "/taiikusai-shift-screen";
   const TaiikusaiShiftScreen({super.key});
+
+  @override
+  State<TaiikusaiShiftScreen> createState() => _TaiikusaiShiftScreenState();
+}
+
+class _TaiikusaiShiftScreenState extends State<TaiikusaiShiftScreen> {
+  final Map<String, Map<String, dynamic>> _loadedTimeMap = {};
 
   Widget _buildHeader() {
     return const SizedBox(
@@ -26,9 +35,25 @@ class TaiikusaiShiftScreen extends StatelessWidget {
     );
   }
 
+  Future _loadData() async {
+    await FirebaseFirestore.instance.collection("taiikusaiTime").doc("taiikusaiTimeDoc").get().then((DocumentSnapshot doc) {
+      Map data = doc.data() as Map;
+      data.forEach((title, timeMap) {
+        _loadedTimeMap[title] = timeMap;
+      });
+    });
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _loadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.getTaiikusaiDataList;
+    const List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
     return Scaffold(
       appBar: AppBar(title: const Text("体育祭シフト")),
       body: Scrollbar(
@@ -43,7 +68,11 @@ class TaiikusaiShiftScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: taiikusaiDataList.length,
                   itemBuilder: (context, index) {
-                    return TaiikusaiShiftCard(taiikusaiDataList: taiikusaiDataList, index: index);
+                    return TaiikusaiShiftCard(
+                      taiikusaiDataList: taiikusaiDataList,
+                      index: index,
+                      loadedTimeMap: _loadedTimeMap,
+                    );
                   },
                 ),
               ],

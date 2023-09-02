@@ -1,4 +1,4 @@
-package com.example.chigusai_app
+package jp.chigusa.chigusai_app
 
 import io.flutter.embedding.android.FlutterActivity
 

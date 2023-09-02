@@ -13,20 +13,23 @@ class BukatsuDetailScreen extends StatelessWidget {
     final bukatsuDetailData = ModalRoute.of(context)!.settings.arguments as BukatsuDetailData;
     return Scaffold(
       appBar: AppBar(title: const Text("企画詳細")),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          ImageViewer(imgPath: bukatsuDetailData.imgPath),
-          const SizedBox(height: 20),
-          Text(
-            bukatsuDetailData.club,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          Text(bukatsuDetailData.place),
-          const SizedBox(height: 30),
-          Text(bukatsuDetailData.pr),
-          // FilledButton(onPressed: () {}, child: const Text("マップ")),
-        ]),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            ImageViewer(imgPath: bukatsuDetailData.imgPath),
+            const SizedBox(height: 20),
+            Text(
+              bukatsuDetailData.club,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            Text(bukatsuDetailData.place),
+            const SizedBox(height: 30),
+            Text(bukatsuDetailData.pr),
+            const SizedBox(height: 100),
+            // FilledButton(onPressed: () {}, child: const Text("マップ")),
+          ]),
+        ),
       ),
     );
   }

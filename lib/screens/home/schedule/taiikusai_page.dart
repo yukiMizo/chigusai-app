@@ -35,7 +35,7 @@ class TaiikusaiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.getTaiikusaiDataList;
+    const List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
 
     return Column(
       children: [

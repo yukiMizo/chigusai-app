@@ -41,6 +41,7 @@ class SonotaPage extends StatelessWidget {
               const Text(saikoshiInfo),
               const SizedBox(height: 20),
               const Text("学祭グッズ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              const SizedBox(height: 5),
               GridView.builder(
                 primary: false,
                 shrinkWrap: true,

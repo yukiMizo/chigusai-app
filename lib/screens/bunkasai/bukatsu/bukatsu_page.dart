@@ -51,6 +51,7 @@ class BukatsuPage extends StatelessWidget {
                   return _buildBukatsuCard(context, bukatsuDataList[index]);
                 },
               ),
+              const SizedBox(height: 100),
             ],
           ),
         ),

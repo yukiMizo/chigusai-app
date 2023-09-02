@@ -1,4 +1,9 @@
+import 'package:chigusai_app/providers/login_data_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as picker;
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -10,23 +15,36 @@ import 'taiikusai_detail_screen.dart';
 
 import '../../data/taiikusai_data.dart';
 
+import 'package:chigusai_app/data/time_data.dart';
+
 import 'result_screen.dart';
 
-class TaiikusaiScreen extends StatefulWidget {
+class TaiikusaiScreen extends ConsumerStatefulWidget {
   static const routeName = "/taiikusai-screen";
   const TaiikusaiScreen({super.key});
 
   @override
-  State<TaiikusaiScreen> createState() => _TaiikusaiScreenState();
+  ConsumerState<TaiikusaiScreen> createState() => _TaiikusaiScreenState();
 }
 
-class _TaiikusaiScreenState extends State<TaiikusaiScreen> {
+class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
+  final Map<String, Map<String, dynamic>> _loadedTimeMap = {};
+
   Widget _buildTaiikusaiCard(BuildContext context, TaiikusaiDetailData taiikusaiDetailData) {
+    final Map? time = _loadedTimeMap[taiikusaiDetailData.title];
     return Card(
       child: ListTile(
         onTap: taiikusaiDetailData.info == null ? null : () => Navigator.of(context).pushNamed(TaiikusaiDetailScreen.routeName, arguments: taiikusaiDetailData),
+        onLongPress: ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin
+            ? () => showDialog(
+                  context: context,
+                  builder: (_) {
+                    return _updateKomiDialog(taiikusaiDetailData.title);
+                  },
+                )
+            : null,
         leading: Text(
-          taiikusaiDetailData.startTime.getTimeAsString(),
+          time == null ? taiikusaiDetailData.startTime.getTimeAsString() : Time(day: GakusaiDay.taiikusai, hour: time["hour"], minute: time["minute"]).getTimeAsString(),
           style: const TextStyle(fontSize: 20),
         ),
         title: Text(
@@ -53,14 +71,100 @@ class _TaiikusaiScreenState extends State<TaiikusaiScreen> {
   Future _loadData() async {
     await FirebaseFirestore.instance.collection("taiikusaiTime").doc("taiikusaiTimeDoc").get().then((DocumentSnapshot doc) {
       Map data = doc.data() as Map;
-      data.forEach((title, time) {});
+      data.forEach((title, timeMap) {
+        _loadedTimeMap[title] = timeMap;
+      });
     });
     setState(() {});
   }
 
+  Widget _showTime(DateTime dateTime) {
+    return Text(
+      Time(day: GakusaiDay.taiikusai, hour: dateTime.hour, minute: dateTime.minute).getTimeAsString(),
+      style: const TextStyle(fontSize: 50),
+    );
+  }
+
+  Widget _updateKomiDialog(String title) {
+    bool dialogIsLoading = false;
+    final DateTime currentTime = DateTime(2023, 9, 6, _loadedTimeMap[title]!["hour"], _loadedTimeMap[title]!["minute"]);
+    DateTime newTime = currentTime;
+    return StatefulBuilder(
+      builder: (context, setStateInDialog) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.all(10),
+          title: Text("$title　時間変更"),
+          content: SizedBox(
+            height: 150,
+            width: 200,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  _showTime(newTime),
+                  IconButton(
+                    onPressed: () async {
+                      DateTime? selectedTime = await picker.DatePicker.showTimePicker(
+                        context,
+                        showTitleActions: true,
+                        showSecondsColumn: false,
+                        currentTime: newTime,
+                        locale: picker.LocaleType.jp,
+                      );
+                      if (selectedTime == null) {
+                        return;
+                      }
+                      setStateInDialog(() {
+                        newTime = selectedTime;
+                      });
+                    },
+                    icon: const Icon(Icons.edit),
+                  )
+                ],
+              ),
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            dialogIsLoading
+                ? const Center(child: CircularProgressIndicator())
+                : SizedBox(
+                    width: 140,
+                    height: 40,
+                    child: FilledButton(
+                      onPressed: newTime == currentTime
+                          ? null
+                          : () async {
+                              setStateInDialog(() {
+                                dialogIsLoading = true;
+                              });
+                              await FirebaseFirestore.instance.collection("taiikusaiTime").doc("taiikusaiTimeDoc").set({
+                                title: {"hour": newTime.hour, "minute": newTime.minute}
+                              }, SetOptions(merge: true));
+                              setState(() {
+                                _loadedTimeMap[title] = {"hour": newTime.hour, "minute": newTime.minute};
+                              });
+                              if (!mounted) return;
+                              Navigator.pop(context);
+                            },
+                      child: const Text("変更"),
+                    ),
+                  ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    _loadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.getTaiikusaiDataList;
+    const List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
     return Scaffold(
       appBar: AppBar(
         title: const Text("体育祭"),
@@ -74,12 +178,20 @@ class _TaiikusaiScreenState extends State<TaiikusaiScreen> {
       drawer: const MainDrawer(),
       body: RefreshIndicator(
         onRefresh: () async {
-          await FirebaseFirestore.instance.collection("taiikusaiTime").doc("tenjiKomiDoc").set({
-            "開会式": {
-              "hour": 13,
-              "minute": 0,
-            }
-          }, SetOptions(merge: true));
+          //_loadData();
+          /*   await FirebaseFirestore.instance.collection("taiikusaiTime").doc("taiikusaiTimeDoc").set({
+            "開会式": {"hour": 8, "minute": 45},
+            "大玉転がし": {"hour": 9, "minute": 20},
+            "玉入れ": {"hour": 9, "minute": 50},
+            "棒引き": {"hour": 10, "minute": 20},
+            "騎馬戦": {"hour": 10, "minute": 50},
+            "障害物競走": {"hour": 11, "minute": 25},
+            "昼休憩": {"hour": 12, "minute": 0},
+            "マジクラ": {"hour": 12, "minute": 55},
+            "ブロパフォ": {"hour": 13, "minute": 15},
+            "ブロリレ": {"hour": 13, "minute": 45},
+            "閉会式": {"hour": 14, "minute": 15},
+          }, SetOptions(merge: true));*/
         },
         child: Scrollbar(
           child: SingleChildScrollView(
@@ -88,6 +200,7 @@ class _TaiikusaiScreenState extends State<TaiikusaiScreen> {
               child: Column(
                 children: [
                   _buildHeader(),
+                  if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin) const Text("※長押しで時間を変更できます"),
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -96,6 +209,7 @@ class _TaiikusaiScreenState extends State<TaiikusaiScreen> {
                       return _buildTaiikusaiCard(context, taiikusaiDataList[index]);
                     },
                   ),
+                  const SizedBox(height: 100),
                 ],
               ),
             ),

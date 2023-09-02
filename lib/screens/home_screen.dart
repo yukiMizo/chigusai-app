@@ -157,19 +157,19 @@ class HomeScreen extends ConsumerWidget {
                     icon: Icons.scoreboard,
                     onPressed: () => Navigator.of(context).pushNamed(ResultScreen.routeName),
                   ),
-                  if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff || ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
+                  if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
                     _functionButton(
                       text: "体育祭結果更新",
                       icon: Icons.sports,
                       onPressed: () => Navigator.of(context).pushNamed(UpdateResultScreen.routeName),
                     ),
                   const SizedBox(width: 10),
-                  if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
+                  /* if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
                     _functionButton(
                       text: "PR動画",
                       icon: Icons.play_arrow,
                       onPressed: () => Navigator.of(context).pushNamed(PRVideoScreen.routeName),
-                    )
+                    )*/
                 ],
               )
             ],

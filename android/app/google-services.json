@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:894268555123:android:0bb92c87d828bd07f70f06",
         "android_client_info": {
-          "package_name": "com.example.chigusai_app"
+          "package_name": "jp.chigusa.chigusai_app"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "894268555123-iihud855hm7aq5enl3qt5qrhb6pg20a4.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.chigusaiApp"
+                "bundle_id": "jp.chigusa.chigusaiApp"
               }
             }
           ]

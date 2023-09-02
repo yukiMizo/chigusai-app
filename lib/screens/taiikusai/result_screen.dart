@@ -134,7 +134,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.getTaiikusaiDataList;
+    final List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
 
     if (_isInit) {
       _loadData();

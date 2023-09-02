@@ -52,9 +52,9 @@ class ZenkoukikakuScreen extends StatelessWidget {
       ZenkouEventType.normal => null,
       ZenkouEventType.bihin => () => Navigator.of(context).pushNamed(BihinScreen.routeName),
       ZenkouEventType.encore => () => Navigator.of(context).pushNamed(EncoreScreen.routeName),
-      ZenkouEventType.sanbon => () => Navigator.of(context).pushNamed(SabbonScreen.routeName),
-      ZenkouEventType.utakai => () => Navigator.of(context).pushNamed(UtakaiScreen.routeName),
-      ZenkouEventType.ff => () => Navigator.of(context).pushNamed(FFScreen.routeName),
+      ZenkouEventType.sanbon => null, // () => Navigator.of(context).pushNamed(SabbonScreen.routeName),
+      ZenkouEventType.utakai => null, // () => Navigator.of(context).pushNamed(UtakaiScreen.routeName),
+      ZenkouEventType.ff => null, // () => Navigator.of(context).pushNamed(FFScreen.routeName),
     };
   }
 

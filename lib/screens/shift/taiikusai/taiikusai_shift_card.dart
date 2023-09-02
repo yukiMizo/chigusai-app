@@ -4,6 +4,8 @@ import 'package:chigusai_app/themes/app_color.dart';
 
 import 'package:chigusai_app/data/taiikusai_data.dart';
 
+import 'package:chigusai_app/data/time_data.dart';
+
 import '../../../local_data.dart';
 import '../../../notification_manager.dart';
 
@@ -12,8 +14,10 @@ enum NotifyType { noNotify, shift, player }
 class TaiikusaiShiftCard extends StatefulWidget {
   final List<TaiikusaiDetailData> taiikusaiDataList;
   final int index;
+  final Map<String, Map<String, dynamic>> loadedTimeMap;
   const TaiikusaiShiftCard({
     super.key,
+    required this.loadedTimeMap,
     required this.taiikusaiDataList,
     required this.index,
   });
@@ -188,10 +192,11 @@ class _TaiikusaiShiftCardState extends State<TaiikusaiShiftCard> {
 
   @override
   Widget build(BuildContext context) {
+    final Map? time = widget.loadedTimeMap[widget.taiikusaiDataList[widget.index].title];
     return Card(
       child: ListTile(
         leading: Text(
-          widget.taiikusaiDataList[widget.index].startTime.getTimeAsString(),
+          time == null ? widget.taiikusaiDataList[widget.index].startTime.getTimeAsString() : Time(day: GakusaiDay.taiikusai, hour: time["hour"], minute: time["minute"]).getTimeAsString(),
           style: const TextStyle(fontSize: 20),
         ),
         title: Text(
