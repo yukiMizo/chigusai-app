@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "894268555123",
+    "project_id": "chigusai",
+    "storage_bucket": "chigusai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894268555123:android:0bb92c87d828bd07f70f06",
+        "android_client_info": {
+          "package_name": "com.example.chigusai_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894268555123-p0doqigk9u28cs9nn28u91l8n9eatcqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFTK0GQh6dF7l8pYRaELz1SriXwTeYTpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894268555123-p0doqigk9u28cs9nn28u91l8n9eatcqt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "894268555123-iihud855hm7aq5enl3qt5qrhb6pg20a4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chigusaiApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
