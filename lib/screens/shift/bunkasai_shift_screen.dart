@@ -203,127 +203,129 @@ class _BunkasaiShiftScreenState extends State<BunkasaiShiftScreen> {
             width: 200,
             child: dialogIsLoading
                 ? const Center(child: CircularProgressIndicator())
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextField(
-                          controller: _titleController,
-                          decoration: const InputDecoration(label: Text("タイトル")),
-                          onChanged: (_) {
-                            setStateInDialog(() {});
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            const Text("開始", style: TextStyle(fontSize: 22)),
-                            SizedBox(
-                              width: 100,
-                              child: TextButton(
-                                onPressed: () async {
-                                  DateTime? selectedTime = await picker.DatePicker.showTimePicker(
-                                    context,
-                                    showTitleActions: true,
-                                    showSecondsColumn: false,
-                                    currentTime: _startTime,
-                                    locale: picker.LocaleType.jp,
-                                  );
-                                  if (selectedTime == null) {
+                : SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            controller: _titleController,
+                            decoration: const InputDecoration(label: Text("タイトル")),
+                            onChanged: (_) {
+                              setStateInDialog(() {});
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const Text("開始", style: TextStyle(fontSize: 22)),
+                              SizedBox(
+                                width: 100,
+                                child: TextButton(
+                                  onPressed: () async {
+                                    DateTime? selectedTime = await picker.DatePicker.showTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      showSecondsColumn: false,
+                                      currentTime: _startTime,
+                                      locale: picker.LocaleType.jp,
+                                    );
+                                    if (selectedTime == null) {
+                                      return;
+                                    }
+                                    setStateInDialog(() {
+                                      _startTime = selectedTime;
+                                    });
+                                  },
+                                  child: Text(_dateTimeToString(_startTime), style: const TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Text("終了", style: TextStyle(fontSize: 22)),
+                              SizedBox(
+                                width: 100,
+                                child: TextButton(
+                                  onPressed: () async {
+                                    DateTime? selectedTime = await picker.DatePicker.showTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      showSecondsColumn: false,
+                                      currentTime: _endTime,
+                                      locale: picker.LocaleType.jp,
+                                    );
+                                    if (selectedTime == null) {
+                                      return;
+                                    }
+                                    setStateInDialog(() {
+                                      _endTime = selectedTime;
+                                    });
+                                  },
+                                  child: Text(_dateTimeToString(_endTime), style: const TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const SizedBox(width: 20),
+                              const Icon(Icons.schedule),
+                              const SizedBox(width: 20),
+                              DropdownButton(
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: NotifyTime.five,
+                                    child: Text("5分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: NotifyTime.ten,
+                                    child: Text("10分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: NotifyTime.fifteen,
+                                    child: Text("15分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: NotifyTime.twenty,
+                                    child: Text("20分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value == null) {
                                     return;
                                   }
                                   setStateInDialog(() {
-                                    _startTime = selectedTime;
+                                    _selectedNotifyTime = value;
                                   });
                                 },
-                                child: Text(_dateTimeToString(_startTime), style: const TextStyle(fontSize: 22)),
+                                value: _selectedNotifyTime,
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("終了", style: TextStyle(fontSize: 22)),
-                            SizedBox(
-                              width: 100,
-                              child: TextButton(
-                                onPressed: () async {
-                                  DateTime? selectedTime = await picker.DatePicker.showTimePicker(
-                                    context,
-                                    showTitleActions: true,
-                                    showSecondsColumn: false,
-                                    currentTime: _endTime,
-                                    locale: picker.LocaleType.jp,
-                                  );
-                                  if (selectedTime == null) {
-                                    return;
-                                  }
-                                  setStateInDialog(() {
-                                    _endTime = selectedTime;
-                                  });
-                                },
-                                child: Text(_dateTimeToString(_endTime), style: const TextStyle(fontSize: 22)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            const SizedBox(width: 20),
-                            const Icon(Icons.schedule),
-                            const SizedBox(width: 20),
-                            DropdownButton(
-                              items: const [
-                                DropdownMenuItem(
-                                  value: NotifyTime.five,
-                                  child: Text("5分前", style: TextStyle(fontSize: 20)),
-                                ),
-                                DropdownMenuItem(
-                                  value: NotifyTime.ten,
-                                  child: Text("10分前", style: TextStyle(fontSize: 20)),
-                                ),
-                                DropdownMenuItem(
-                                  value: NotifyTime.fifteen,
-                                  child: Text("15分前", style: TextStyle(fontSize: 20)),
-                                ),
-                                DropdownMenuItem(
-                                  value: NotifyTime.twenty,
-                                  child: Text("20分前", style: TextStyle(fontSize: 20)),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value == null) {
-                                  return;
-                                }
-                                setStateInDialog(() {
-                                  _selectedNotifyTime = value;
-                                });
-                              },
-                              value: _selectedNotifyTime,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        const Text("カラー", style: TextStyle(fontSize: 22)),
-                        const SizedBox(height: 5),
-                        Row(
-                          children: [
-                            _colorButton(0, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(1, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(2, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(3, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(4, setStateInDialog),
-                          ],
-                        )
-                      ],
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          const Text("カラー", style: TextStyle(fontSize: 22)),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              _colorButton(0, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(1, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(2, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(3, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(4, setStateInDialog),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                ),
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: <Widget>[
@@ -426,127 +428,129 @@ class _BunkasaiShiftScreenState extends State<BunkasaiShiftScreen> {
             width: 200,
             child: dialogIsLoading
                 ? const Center(child: CircularProgressIndicator())
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextField(
-                          controller: _titleController,
-                          decoration: const InputDecoration(label: Text("タイトル")),
-                          onChanged: (_) {
-                            setStateInDialog(() {});
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            const Text("開始", style: TextStyle(fontSize: 22)),
-                            SizedBox(
-                              width: 100,
-                              child: TextButton(
-                                onPressed: () async {
-                                  DateTime? selectedTime = await picker.DatePicker.showTimePicker(
-                                    context,
-                                    showTitleActions: true,
-                                    showSecondsColumn: false,
-                                    currentTime: _startTime,
-                                    locale: picker.LocaleType.jp,
-                                  );
-                                  if (selectedTime == null) {
+                : SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            controller: _titleController,
+                            decoration: const InputDecoration(label: Text("タイトル")),
+                            onChanged: (_) {
+                              setStateInDialog(() {});
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const Text("開始", style: TextStyle(fontSize: 22)),
+                              SizedBox(
+                                width: 100,
+                                child: TextButton(
+                                  onPressed: () async {
+                                    DateTime? selectedTime = await picker.DatePicker.showTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      showSecondsColumn: false,
+                                      currentTime: _startTime,
+                                      locale: picker.LocaleType.jp,
+                                    );
+                                    if (selectedTime == null) {
+                                      return;
+                                    }
+                                    setStateInDialog(() {
+                                      _startTime = selectedTime;
+                                    });
+                                  },
+                                  child: Text(_dateTimeToString(_startTime), style: const TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Text("終了", style: TextStyle(fontSize: 22)),
+                              SizedBox(
+                                width: 100,
+                                child: TextButton(
+                                  onPressed: () async {
+                                    DateTime? selectedTime = await picker.DatePicker.showTimePicker(
+                                      context,
+                                      showTitleActions: true,
+                                      showSecondsColumn: false,
+                                      currentTime: _endTime,
+                                      locale: picker.LocaleType.jp,
+                                    );
+                                    if (selectedTime == null) {
+                                      return;
+                                    }
+                                    setStateInDialog(() {
+                                      _endTime = selectedTime;
+                                    });
+                                  },
+                                  child: Text(_dateTimeToString(_endTime), style: const TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const SizedBox(width: 20),
+                              const Icon(Icons.schedule),
+                              const SizedBox(width: 20),
+                              DropdownButton(
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: NotifyTime.five,
+                                    child: Text("5分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: NotifyTime.ten,
+                                    child: Text("10分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: NotifyTime.fifteen,
+                                    child: Text("15分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: NotifyTime.twenty,
+                                    child: Text("20分前", style: TextStyle(fontSize: 20)),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value == null) {
                                     return;
                                   }
                                   setStateInDialog(() {
-                                    _startTime = selectedTime;
+                                    _selectedNotifyTime = value;
                                   });
                                 },
-                                child: Text(_dateTimeToString(_startTime), style: const TextStyle(fontSize: 22)),
+                                value: _selectedNotifyTime,
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("終了", style: TextStyle(fontSize: 22)),
-                            SizedBox(
-                              width: 100,
-                              child: TextButton(
-                                onPressed: () async {
-                                  DateTime? selectedTime = await picker.DatePicker.showTimePicker(
-                                    context,
-                                    showTitleActions: true,
-                                    showSecondsColumn: false,
-                                    currentTime: _endTime,
-                                    locale: picker.LocaleType.jp,
-                                  );
-                                  if (selectedTime == null) {
-                                    return;
-                                  }
-                                  setStateInDialog(() {
-                                    _endTime = selectedTime;
-                                  });
-                                },
-                                child: Text(_dateTimeToString(_endTime), style: const TextStyle(fontSize: 22)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            const SizedBox(width: 20),
-                            const Icon(Icons.schedule),
-                            const SizedBox(width: 20),
-                            DropdownButton(
-                              items: const [
-                                DropdownMenuItem(
-                                  value: NotifyTime.five,
-                                  child: Text("5分前", style: TextStyle(fontSize: 20)),
-                                ),
-                                DropdownMenuItem(
-                                  value: NotifyTime.ten,
-                                  child: Text("10分前", style: TextStyle(fontSize: 20)),
-                                ),
-                                DropdownMenuItem(
-                                  value: NotifyTime.fifteen,
-                                  child: Text("15分前", style: TextStyle(fontSize: 20)),
-                                ),
-                                DropdownMenuItem(
-                                  value: NotifyTime.twenty,
-                                  child: Text("20分前", style: TextStyle(fontSize: 20)),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value == null) {
-                                  return;
-                                }
-                                setStateInDialog(() {
-                                  _selectedNotifyTime = value;
-                                });
-                              },
-                              value: _selectedNotifyTime,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        const Text("カラー", style: TextStyle(fontSize: 22)),
-                        const SizedBox(height: 5),
-                        Row(
-                          children: [
-                            _colorButton(0, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(1, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(2, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(3, setStateInDialog),
-                            const SizedBox(width: 8),
-                            _colorButton(4, setStateInDialog),
-                          ],
-                        )
-                      ],
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          const Text("カラー", style: TextStyle(fontSize: 22)),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              _colorButton(0, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(1, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(2, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(3, setStateInDialog),
+                              const SizedBox(width: 8),
+                              _colorButton(4, setStateInDialog),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                ),
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: <Widget>[

@@ -194,16 +194,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("ログイン")),
-      body: GestureDetector(
-        onTap: () {
-          final FocusScopeNode currentScope = FocusScope.of(context);
-          if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
-            FocusManager.instance.primaryFocus!.unfocus();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Padding(padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20), child: _buildLoginScreen()),
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () {
+            final FocusScopeNode currentScope = FocusScope.of(context);
+            if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
+              FocusManager.instance.primaryFocus!.unfocus();
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Padding(padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20), child: _buildLoginScreen()),
+          ),
         ),
       ),
     );
