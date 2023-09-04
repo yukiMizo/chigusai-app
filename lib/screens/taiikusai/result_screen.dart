@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:chigusai_app/data/taiikusai_data.dart';
 
+import 'package:chigusai_app/data/time_data.dart';
+
 class RankWidgetData {
   final int place;
   final String className;
@@ -134,8 +136,15 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
-
+    final List<TaiikusaiDetailData> taiikusaiDataList = [...TaiikusaiData.taiikusaiDataList];
+    taiikusaiDataList.removeWhere((data) => data.showResult == false);
+    taiikusaiDataList.add(const TaiikusaiDetailData(
+        title: "全体",
+        startTime: Time(
+          day: GakusaiDay.taiikusai,
+          hour: 20,
+        ),
+        showResult: true),);
     if (_isInit) {
       _loadData();
       _isInit = false;

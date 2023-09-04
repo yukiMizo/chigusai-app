@@ -1,3 +1,4 @@
+import 'package:chigusai_app/providers/login_data_provider.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
@@ -7,8 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'notification_detail_screen.dart';
-
-import '../home_screen.dart';
 
 class NotificationDataToPass {
   final Map data;
@@ -20,16 +19,16 @@ class NotificationDataToPass {
   });
 }
 
-class NotificationScreen extends StatefulWidget {
+class NotificationScreen extends ConsumerStatefulWidget {
   static const routeName = "/notification-screen";
 
   const NotificationScreen({super.key});
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  ConsumerState<NotificationScreen> createState() => _NotificationScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _NotificationScreenState extends ConsumerState<NotificationScreen> {
   bool _isLoading = false;
   bool _isInit = true;
   final List<Map> _notifications = [];
@@ -174,13 +173,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 width: 140,
                 height: 40,
                 child: FilledButton(
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                  ),
                   child: const Text("消去"),
                   onPressed: () async {
                     setStateInDialog(() {
@@ -194,10 +186,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         content: Text('通知を消去しました。'),
                       ),
                     );
-                    Navigator.popUntil(
-                      context,
-                      ModalRoute.withName(HomeScreen.routeName),
-                    );
+                    Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
                   },
                 ),
               ),
@@ -237,6 +226,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 return _notificationWidget(
                   notificationData: _notifications[index],
                   index: index,
+                  isLoggedInAdmin: ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin,
                   // isLoggedInAdmin: isLoggedInAdmin,
                 );
               }),
