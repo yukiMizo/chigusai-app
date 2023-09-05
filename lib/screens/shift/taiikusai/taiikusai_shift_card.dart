@@ -13,11 +13,13 @@ enum NotifyType { noNotify, shift, player }
 
 class TaiikusaiShiftCard extends StatefulWidget {
   final List<TaiikusaiDetailData> taiikusaiDataList;
+  final int day;
   final int index;
   final Map<String, Map<String, dynamic>> loadedTimeMap;
   const TaiikusaiShiftCard({
     super.key,
     required this.loadedTimeMap,
+    required this.day,
     required this.taiikusaiDataList,
     required this.index,
   });
@@ -69,7 +71,7 @@ class _TaiikusaiShiftCardState extends State<TaiikusaiShiftCard> {
     final int minute = widget.taiikusaiDataList[indexToGet].startTime.minute;
     await NotificationManager.registerLocNotification(
       id: _getId,
-      day: 6,
+      day: widget.day,
       hour: hour,
       minute: minute,
       title: "シフト",

@@ -38,6 +38,7 @@ class BunkasaiScreen extends StatelessWidget {
             ),
           ],
           bottom: const TabBar(
+            indicatorSize: TabBarIndicatorSize.tab,
             unselectedLabelColor: AppColors.lightText1,
             labelColor: AppColors.lightText1,
             tabs: tabs,

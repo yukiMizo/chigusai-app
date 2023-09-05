@@ -51,7 +51,7 @@ class EngekiData {
     ),
     EngekiDetailData(
       hr: "304",
-      title: "アナと雪の女",
+      title: "アナと雪の女王",
       pr: "新しい世界を夢見る妹のアナ。魔法の力を恐れ、感情を抑えて生きる 姉のエルサ。しかし、ある日エルサは力を抑えられず、国中を凍らせてしまう…。愛とは何か、ありのままの自分とは何か。凍った世界を溶かすのは‥",
       imgPath: "assets/images/bunkasai/engeki/304.jpg",
       soukanImgPath: "assets/images/bunkasai/engeki/304s.jpg",
@@ -70,7 +70,7 @@ class EngekiData {
     EngekiDetailData(
       hr: "306",
       title: "夢から醒めた夢",
-      pr: "そこでココは夢の世界と出会う。マコは交通事故で死に、最後にお別れを言えなかった母に会うため、ピコに1日入れ代わって欲しいと言う。そしてやって来た空界。そこでピコは素敵な人達を出会いー",
+      pr: "そこでピコは夢の世界と出会う。マコは交通事故で死に、最後にお別れを言えなかった母に会うため、ピコに1日入れ代わって欲しいと言う。そしてやって来た霊界でピコは素敵な人たちと出会いー",
       imgPath: "assets/images/bunkasai/engeki/306.jpg",
       soukanImgPath: "assets/images/bunkasai/engeki/306s.jpg",
       startTime: Time(day: GakusaiDay.bunkasai1, hour: 13, minute: 05),
@@ -79,7 +79,7 @@ class EngekiData {
     EngekiDetailData(
       hr: "307",
       title: "リメンバーミー",
-      pr: "昔、メキシコのセンタシリアである男がギターを片手に歌を歌った。後に世界中で有名になるその男の名はエルネスト・デラクルス。これは彼の死後、死者の世界に迷い込んだ少年ミゲルが憧れの彼に会いに行く物語である。",
+      pr: "昔、メキシコのサンタセシリアである男がギターを片手に歌を歌った。後に世界中で有名になるその男の名はエルネスト・デラクルス。これは彼の死後、死者の世界に迷い込んだ少年ミゲルが憧れの彼に会いに行く物語である。",
       imgPath: "assets/images/bunkasai/engeki/307.jpg",
       soukanImgPath: "assets/images/bunkasai/engeki/307s.jpg",
       startTime: Time(day: GakusaiDay.bunkasai2, hour: 11, minute: 15),
@@ -98,8 +98,8 @@ class EngekiData {
       hr: "309",
       title: "the SOUND of MUSIC",
       pr: "私修道女のマリア！！ある日院長様からザルツブルクの男爵家の家庭教師になるよう命じられたわ（T＿T）うまくできるか心配・・・信じられる？！7人も子供がいるのよ！！どうなっちゃうの？！",
-      imgPath: "assets/images/bunkasai/engeki/309.jpg",
-      soukanImgPath: "assets/images/bunkasai/engeki/309s.jpg",
+      imgPath: "assets/images/bunkasai/engeki/301.jpg",
+      soukanImgPath: "assets/images/bunkasai/engeki/301.jpg",
       startTime: Time(day: GakusaiDay.bunkasai1, hour: 11, minute: 55),
       endTime: Time(day: GakusaiDay.bunkasai1, hour: 12, minute: 50),
     ),

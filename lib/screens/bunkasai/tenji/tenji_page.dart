@@ -217,6 +217,7 @@ class _TenjiPageState extends ConsumerState<TenjiPage> {
                     return _buildTenjiCard(context, tenjiDataList[index]);
                   },
                 ),
+                const SizedBox(height: 100),
               ],
             ),
           ),

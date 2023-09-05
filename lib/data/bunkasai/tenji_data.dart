@@ -41,7 +41,7 @@ class TenjiData {
     TenjiDetailData(
       hr: "105",
       title: "サバイバル・インポッシブル",
-      pr: "もし無人島に流れ着いた時、生き残る自信はありますか？\n鍵となるのは、アイテムをどう使うか。年齢なんて関係ない！あなたのサバイバル生活がはじまります!",
+      pr: "もし無人島に流れ着いた時、生き残る自信はありますか?\n鍵となるのは、アイテムをどう使うか。年齢なんて関係ない!あなたのサバイバル生活がはじまります!",
       imgPath: "assets/images/bunkasai/tenji/105.jpg",
     ),
     TenjiDetailData(
@@ -71,25 +71,25 @@ class TenjiData {
     TenjiDetailData(
       hr: "201",
       title: "I AM・・・",
-      pr: "世界中に派遣されるAIロボットを大量生産する工場で大事件が！\nいつか人間はAIに抜かされると言われているこの時代、あなたは自分を見失わずに生きていけますか?",
+      pr: "世界中に派遣されるAIロボットを大量生産する工場で大事件が!\nいつか人間はAIに抜かされると言われているこの時代、あなたは自分を見失わずに生きていけますか?",
       imgPath: "assets/images/bunkasai/tenji/201.jpg",
     ),
     TenjiDetailData(
       hr: "202",
       title: "児童販売機",
-      pr: "202特性のスペシャルドリンクで貴方のコンプレックスを無くしませんか？\nただし作り方は企業秘密、絶対に口外しないように...\nでは202でお待ちしております。",
+      pr: "202特製のスペシャルドリンクで貴方のコンプレックスを無くしませんか？\nただし作り方は企業秘密、絶対に口外しないように...\nでは202でお待ちしております。",
       imgPath: "assets/images/bunkasai/tenji/202.jpg",
     ),
     TenjiDetailData(
       hr: "203",
       title: "DRAGON QUEST 20XX",
-      pr: "時は20xx年-暴走するAIに侵食される町 を救うため冒険に出よう！\n我々人間とAIが 共存できる未来を救え!これは君が 主人公になれるゲームだ！",
+      pr: "時は20xx年-暴走するAIに侵食される町 を救うため冒険に出よう!\n我々人間とAIが 共存できる未来を救え!これは君が 主人公になれるゲームだ！",
       imgPath: "assets/images/bunkasai/tenji/203.jpg",
     ),
     TenjiDetailData(
       hr: "204",
       title: "ヌスミーマート",
-      pr: "時は20xx年-暴走するAIに侵食される町 を救うため冒険に出よう!我々人間とAIが 共存できる未来を救え!これは君が 主人公になれるゲームだ！",
+      pr: "コンビニ「ヌスミーマート」での万引き体験をおこなっています！\nフォトスポットもあるので、思い出になることまちがいなし。\nぜひ204にお越しください！",
       imgPath: "assets/images/bunkasai/tenji/204.jpg",
     ),
     TenjiDetailData(
@@ -101,13 +101,13 @@ class TenjiData {
     TenjiDetailData(
       hr: "206",
       title: "Eyes~ MISSION×DARK SEE WITH~",
-      pr: "宇宙船が故障して星に不時着？！ \n科学研究所に時限 爆弾が仕掛けられた？！ みはあらゆる困難を乗り越えて無事にこの空間から 脱出することはできるのか？！",
+      pr: "宇宙船が故障して星に不時着？！ \n科学研究所に時限 爆弾が仕掛けられた？！ きみはあらゆる困難を乗り越えて無事にこの空間から脱出することはできるのか？！",
       imgPath: "assets/images/bunkasai/tenji/206.jpg",
     ),
     TenjiDetailData(
       hr: "207",
       title: "SPACE DEBRIS",
-      pr: "西暦2223年の未来。人類の生活の場に宇宙が入りこんでいた。宇宙ゴミが深刻化した世界。\n君たちはこの危機を救えるか。",
+      pr: "西暦2223年の未来。人類の生活の場に宇宙が入りこんでいた。宇宙ゴミが深刻化した世界。君たちはこの危機を救えるか。",
       imgPath: "assets/images/bunkasai/tenji/207.jpg",
     ),
     TenjiDetailData(

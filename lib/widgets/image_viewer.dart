@@ -66,7 +66,7 @@ class ImageViewer extends StatelessWidget {
           children: [
             Text(
               '※タップで画像をプレビューします。',
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12,color: Colors.grey),
             ),
           ],
         ),

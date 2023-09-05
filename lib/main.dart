@@ -45,11 +45,14 @@ import 'screens/taiikusai/update_result_screen.dart';
 import 'screens/taiikusai/taiikusai_screen.dart';
 //zenkou/
 import 'screens/zenkou/bihin_screen.dart';
-import 'screens/zenkou/sanbon_screen.dart';
-import 'screens/zenkou/encore_screen.dart';
-import 'screens/zenkou/ff_screen.dart';
-import 'screens/zenkou/utakai_screen.dart';
-import 'screens/zenkou/zenkoukikaku_screen.dart';
+import 'screens/zenkou/sanbon/sanbon_screen.dart';
+import 'screens/zenkou/sanbon/sanbon_detail_screen.dart';
+import 'screens/zenkou/encore/encore_screen.dart';
+import 'screens/zenkou/utakai/utakai_screen.dart';
+import 'screens/zenkou/utakai/utakai_detail_screen.dart';
+import 'screens/zenkou/ff/ff_screen.dart';
+import 'screens/zenkou/ff/mime_screen.dart';
+import 'screens/zenkou/ff/hanabi_screen.dart';
 //shift/
 import 'screens/shift/shift_screen.dart';
 import 'screens/shift/taiikusai/taiikusai_shift_screen.dart';
@@ -116,6 +119,10 @@ class MyApp extends StatelessWidget {
         EncoreScreen.routeName: (ctx) => const EncoreScreen(),
         UtakaiScreen.routeName: (ctx) => const UtakaiScreen(),
         FFScreen.routeName: (ctx) => const FFScreen(),
+        UtakaiDetailScreen.routeName: (ctx) => const UtakaiDetailScreen(),
+        SanbonDetailScreen.routeName: (ctx) => const SanbonDetailScreen(),
+        MimeScreen.routeName: (ctx) => const MimeScreen(),
+        HanabiScreen.routeName: (ctx) => const HanabiScreen(),
         //shift/
         ShiftScreen.routeName: (ctx) => const ShiftScreen(),
         TaiikusaiShiftScreen.routeName: (ctx) => const TaiikusaiShiftScreen(),

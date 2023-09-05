@@ -16,6 +16,8 @@ class TaiikusaiShiftScreen extends StatefulWidget {
 
 class _TaiikusaiShiftScreenState extends State<TaiikusaiShiftScreen> {
   final Map<String, Map<String, dynamic>> _loadedTimeMap = {};
+  List<TaiikusaiDetailData> _taiikusaiDataList = [];
+  int _day = 6;
 
   Widget _buildHeader() {
     return const SizedBox(
@@ -39,21 +41,29 @@ class _TaiikusaiShiftScreenState extends State<TaiikusaiShiftScreen> {
     await FirebaseFirestore.instance.collection("taiikusaiTime").doc("taiikusaiTimeDoc").get().then((DocumentSnapshot doc) {
       Map data = doc.data() as Map;
       data.forEach((title, timeMap) {
-        _loadedTimeMap[title] = timeMap;
+        if (title == "day") {
+          _day = timeMap;
+        } else {
+          _loadedTimeMap[title] = timeMap;
+        }
       });
     });
+    try {
+      _taiikusaiDataList
+          .sort(((a, b) => (_loadedTimeMap[a.title]!["hour"] * 100 + _loadedTimeMap[a.title]!["minute"]).compareTo((_loadedTimeMap[b.title]!["hour"] * 100 + _loadedTimeMap[b.title]!["minute"]))));
+    } catch (_) {}
     setState(() {});
   }
 
   @override
   void initState() {
     _loadData();
+    _taiikusaiDataList = [...TaiikusaiData.taiikusaiDataList];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    const List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
     return Scaffold(
       appBar: AppBar(title: const Text("体育祭シフト")),
       body: Scrollbar(
@@ -66,10 +76,11 @@ class _TaiikusaiShiftScreenState extends State<TaiikusaiShiftScreen> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: taiikusaiDataList.length,
+                  itemCount: _taiikusaiDataList.length,
                   itemBuilder: (context, index) {
                     return TaiikusaiShiftCard(
-                      taiikusaiDataList: taiikusaiDataList,
+                      taiikusaiDataList: _taiikusaiDataList,
+                      day: _day,
                       index: index,
                       loadedTimeMap: _loadedTimeMap,
                     );

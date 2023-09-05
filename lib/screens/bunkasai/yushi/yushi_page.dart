@@ -90,22 +90,44 @@ class YushiPage extends StatelessWidget {
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView.builder(
-                itemCount: yushiDataList1.length,
-                itemBuilder: (context, index) {
-                  return _buildYushiCard(context, yushiDataList1[index]);
-                },
+            Scrollbar(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: yushiDataList1.length,
+                        itemBuilder: (context, index) {
+                          return _buildYushiCard(context, yushiDataList1[index]);
+                        },
+                      ),
+                      const SizedBox(height: 100),
+                    ],
+                  ),
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView.builder(
-                itemCount: yushiDataList2.length,
-                itemBuilder: (context, index) {
-                  return _buildYushiCard(context, yushiDataList2[index]);
-                },
+            Scrollbar(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: yushiDataList2.length,
+                        itemBuilder: (context, index) {
+                          return _buildYushiCard(context, yushiDataList2[index]);
+                        },
+                      ),
+                      const SizedBox(height: 100),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

@@ -29,27 +29,33 @@ class TaiikusaiScreen extends ConsumerStatefulWidget {
 
 class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
   final Map<String, Map<String, dynamic>> _loadedTimeMap = {};
+  List<TaiikusaiDetailData> _taiikusaiDataList = [];
 
   Widget _buildTaiikusaiCard(BuildContext context, TaiikusaiDetailData taiikusaiDetailData) {
     final Map? time = _loadedTimeMap[taiikusaiDetailData.title];
-    return Card(
-      child: ListTile(
-        onTap: taiikusaiDetailData.info == null ? null : () => Navigator.of(context).pushNamed(TaiikusaiDetailScreen.routeName, arguments: taiikusaiDetailData),
-        onLongPress: ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin
-            ? () => showDialog(
-                  context: context,
-                  builder: (_) {
-                    return _updateKomiDialog(taiikusaiDetailData.title);
-                  },
-                )
-            : null,
-        leading: Text(
-          time == null ? taiikusaiDetailData.startTime.getTimeAsString() : Time(day: GakusaiDay.taiikusai, hour: time["hour"], minute: time["minute"]).getTimeAsString(),
-          style: const TextStyle(fontSize: 20),
-        ),
-        title: Text(
-          taiikusaiDetailData.title,
-          style: const TextStyle(fontSize: 20),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: taiikusaiDetailData.info == null ? 10 : 0),
+      child: Card(
+        elevation: taiikusaiDetailData.info == null ? 0.25 : null,
+        child: ListTile(
+          onTap: taiikusaiDetailData.info == null ? null : () => Navigator.of(context).pushNamed(TaiikusaiDetailScreen.routeName, arguments: taiikusaiDetailData),
+          onLongPress: ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin
+              ? () => showDialog(
+                    context: context,
+                    builder: (_) {
+                      return _updateTimeDialog(taiikusaiDetailData.title);
+                    },
+                  )
+              : null,
+          leading: Text(
+            time == null ? taiikusaiDetailData.startTime.getTimeAsString() : Time(day: GakusaiDay.taiikusai, hour: time["hour"], minute: time["minute"]).getTimeAsString(),
+            style: const TextStyle(fontSize: 20),
+          ),
+          title: Text(
+            taiikusaiDetailData.title,
+            style: const TextStyle(fontSize: 20),
+          ),
+          trailing: taiikusaiDetailData.info == null ? null : const Icon(Icons.arrow_forward, color: Colors.grey),
         ),
       ),
     );
@@ -72,9 +78,16 @@ class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
     await FirebaseFirestore.instance.collection("taiikusaiTime").doc("taiikusaiTimeDoc").get().then((DocumentSnapshot doc) {
       Map data = doc.data() as Map;
       data.forEach((title, timeMap) {
-        _loadedTimeMap[title] = timeMap;
+        if (title == "day") {
+        } else {
+          _loadedTimeMap[title] = timeMap;
+        }
       });
     });
+    try {
+      _taiikusaiDataList
+          .sort(((a, b) => (_loadedTimeMap[a.title]!["hour"] * 100 + _loadedTimeMap[a.title]!["minute"]).compareTo((_loadedTimeMap[b.title]!["hour"] * 100 + _loadedTimeMap[b.title]!["minute"]))));
+    } catch (_) {}
     setState(() {});
   }
 
@@ -85,7 +98,7 @@ class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
     );
   }
 
-  Widget _updateKomiDialog(String title) {
+  Widget _updateTimeDialog(String title) {
     bool dialogIsLoading = false;
     final DateTime currentTime = DateTime(2023, 9, 6, _loadedTimeMap[title]!["hour"], _loadedTimeMap[title]!["minute"]);
     DateTime newTime = currentTime;
@@ -144,6 +157,10 @@ class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
                               setState(() {
                                 _loadedTimeMap[title] = {"hour": newTime.hour, "minute": newTime.minute};
                               });
+                              try {
+                                _taiikusaiDataList.sort(((a, b) => (_loadedTimeMap[a.title]!["hour"] * 100 + _loadedTimeMap[a.title]!["minute"])
+                                    .compareTo((_loadedTimeMap[b.title]!["hour"] * 100 + _loadedTimeMap[b.title]!["minute"]))));
+                              } catch (_) {}
                               if (!mounted) return;
                               Navigator.pop(context);
                             },
@@ -159,12 +176,12 @@ class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
   @override
   void initState() {
     _loadData();
+    _taiikusaiDataList = [...TaiikusaiData.taiikusaiDataList];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    const List<TaiikusaiDetailData> taiikusaiDataList = TaiikusaiData.taiikusaiDataList;
     return Scaffold(
       appBar: AppBar(
         title: const Text("体育祭"),
@@ -204,9 +221,9 @@ class _TaiikusaiScreenState extends ConsumerState<TaiikusaiScreen> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: taiikusaiDataList.length,
+                    itemCount: _taiikusaiDataList.length,
                     itemBuilder: (context, index) {
-                      return _buildTaiikusaiCard(context, taiikusaiDataList[index]);
+                      return _buildTaiikusaiCard(context, _taiikusaiDataList[index]);
                     },
                   ),
                   const SizedBox(height: 100),

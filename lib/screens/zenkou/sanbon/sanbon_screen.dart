@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:chigusai_app/data/zenkokikaku/sanbon_data.dart';
+import 'sanbon_detail_screen.dart';
 
 class SabbonScreen extends StatelessWidget {
   static const routeName = "/sanbon-screen";
@@ -11,6 +12,7 @@ class SabbonScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: ListTile(
+          onTap: () => Navigator.of(context).pushNamed(SanbonDetailScreen.routeName, arguments: sanbonDetailData),
           leading: Container(
             width: 100,
             height: 60,
@@ -33,7 +35,7 @@ class SabbonScreen extends StatelessWidget {
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

@@ -62,6 +62,7 @@ class EngekiPage extends StatelessWidget {
                   return _buildEngekiCard(context, engekiDataList[index]);
                 },
               ),
+              const SizedBox(height: 100),
             ],
           ),
         ),

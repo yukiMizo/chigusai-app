@@ -59,7 +59,7 @@ class YushiData {
       imgPath: "assets/images/bunkasai/yushi/bloom.jpg",
     ),
     YushiDetailData(
-      title: "lovesoly",
+      title: "lovesly",
       startTime: Time(day: GakusaiDay.bunkasai1, hour: 15, minute: 0),
       place: "メインストリート",
       imgPath: "assets/images/bunkasai/yushi/lovesly.jpg",
@@ -89,7 +89,7 @@ class YushiData {
       imgPath: "assets/images/bunkasai/yushi/destruam.jpg",
     ),
     YushiDetailData(
-      title: "harmonica",
+      title: "Harmonica",
       startTime: Time(day: GakusaiDay.bunkasai2, hour: 11, minute: 30),
       place: "音楽室",
       imgPath: "assets/images/bunkasai/yushi/harmonica.jpg",

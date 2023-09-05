@@ -6,10 +6,10 @@ import '../notification/notification_screen.dart';
 
 import 'package:chigusai_app/data/zenkokikaku/zenkou_data.dart';
 import 'bihin_screen.dart';
-import 'sanbon_screen.dart';
-import 'encore_screen.dart';
-import 'ff_screen.dart';
-import 'utakai_screen.dart';
+import 'sanbon/sanbon_screen.dart';
+import 'encore/encore_screen.dart';
+import 'ff/ff_screen.dart';
+import 'utakai/utakai_screen.dart';
 
 class ZenkoukikakuScreen extends StatelessWidget {
   static const routeName = "/zenkoukikaku-screen";
@@ -29,6 +29,7 @@ class ZenkoukikakuScreen extends StatelessWidget {
             zenkouDetailData.title,
             style: const TextStyle(fontSize: 20),
           ),
+          trailing: zenkouDetailData.zenkouEventType == ZenkouEventType.normal ? null : const Icon(Icons.arrow_forward, color: Colors.grey),
         ),
       ),
     );
@@ -52,9 +53,9 @@ class ZenkoukikakuScreen extends StatelessWidget {
       ZenkouEventType.normal => null,
       ZenkouEventType.bihin => () => Navigator.of(context).pushNamed(BihinScreen.routeName),
       ZenkouEventType.encore => () => Navigator.of(context).pushNamed(EncoreScreen.routeName),
-      ZenkouEventType.sanbon => null, // () => Navigator.of(context).pushNamed(SabbonScreen.routeName),
-      ZenkouEventType.utakai => null, // () => Navigator.of(context).pushNamed(UtakaiScreen.routeName),
-      ZenkouEventType.ff => null, // () => Navigator.of(context).pushNamed(FFScreen.routeName),
+      ZenkouEventType.sanbon => () => Navigator.of(context).pushNamed(SabbonScreen.routeName),
+      ZenkouEventType.utakai => () => Navigator.of(context).pushNamed(UtakaiScreen.routeName),
+      ZenkouEventType.ff => () => Navigator.of(context).pushNamed(FFScreen.routeName),
     };
   }
 
@@ -90,6 +91,7 @@ class ZenkoukikakuScreen extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(height: 100),
               ],
             ),
           ),

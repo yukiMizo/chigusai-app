@@ -23,7 +23,7 @@ class _EncoreFormScreenState extends State<EncoreFormScreen> {
       body: Stack(
         children: [
           WebView(
-            initialUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeMywwMQKdMfcu62kKY1WMvE8rgsZIpERbdc0H7NtWDXtPg-g/viewform',
+            initialUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSctMTCUNsjOKDK1FxPT8j7eFVq49QSSWs5hBkcYs_Hoh8eYLg/viewform',
             javascriptMode: JavascriptMode.unrestricted,
             onPageFinished: (String utl) {
               setState(() {
