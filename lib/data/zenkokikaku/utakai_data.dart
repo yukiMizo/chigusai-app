@@ -13,7 +13,7 @@ class UtakaiDetailData {
 class UtakaiData {
   static const List<UtakaiDetailData> utakaiDataList = [
     UtakaiDetailData(
-        title: "明日はあそびなす",
+        title: "明日はやすみなす",
         pr: "揚げナス ビーナス やすみなす。\nどうも、明日はやすみなすです🍆テーマソングが流れるのは毎日退校までの10分間ですが、千種生なら一人残らず完璧に歌えるんじゃないでしょうか！\n\n私たちはこの曲に、3年間を無駄にせず、全力で楽しめ！というメッセージをこめました！\n文化祭が終わっても、みなさんがこの曲を聴けば今を鮮明に思い出せるように、私たちの全力な演奏とみなさんの全力な盛り上がりで、最高のライブを作りあげましょう！",
         imgPath: "assets/images/zenkou/utakai/springgamer.jpg"),
     UtakaiDetailData(
