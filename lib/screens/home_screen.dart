@@ -16,7 +16,8 @@ import 'notification/send_notification_screen.dart';
 
 //import 'home/comment_box_screen.dart';
 import 'home/map_screen.dart';
-//import 'home/pr_video_screen.dart';
+//import 'home/pr_video/pr_video_screen.dart';
+//import 'home/pr_video/show_pr_video_screen.dart';
 import 'taiikusai/result_screen.dart';
 //import 'home/schedule/schedule_screen.dart';
 import 'home/theme_song/theme_song_screen.dart';
@@ -164,18 +165,19 @@ class HomeScreen extends ConsumerWidget {
                       text: "体育祭結果更新",
                       icon: Icons.sports,
                       onPressed: () => Navigator.of(context).pushNamed(UpdateResultScreen.routeName),
-                    ),if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
+                    ),
+                  if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
                     _functionButton(
                       text: "通知を送る",
                       icon: Icons.send,
                       onPressed: () => Navigator.of(context).pushNamed(SendNotificationScreen.routeName),
                     ),
                   const SizedBox(width: 10),
-                  /* if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
+                  /*if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
                     _functionButton(
                       text: "PR動画",
                       icon: Icons.play_arrow,
-                      onPressed: () => Navigator.of(context).pushNamed(PRVideoScreen.routeName),
+                      onPressed: () => Navigator.of(context).pushNamed(ShowPRVideoScreen.routeName),
                     )*/
                 ],
               )

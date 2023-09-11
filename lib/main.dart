@@ -30,9 +30,10 @@ import 'screens/drawer/terms_of_service_screen.dart';
 //home/
 import 'screens/home/comment_box_screen.dart';
 import 'screens/home/map_screen.dart';
-import 'screens/home/pr_video_screen.dart';
+//import 'screens/home/pr_video/pr_video_screen.dart';
 import 'screens/home/schedule/schedule_screen.dart';
 import 'screens/home/theme_song/theme_song_screen.dart';
+//import 'screens/home/pr_video/show_pr_video_screen.dart';
 //bunkasai/
 import 'screens/bunkasai/tenji/tenji_detail_screen.dart';
 import 'screens/bunkasai/engeki/engeki_detail_screen.dart';
@@ -101,7 +102,6 @@ class MyApp extends StatelessWidget {
         //home
         CommentBoxScreen.routeName: (ctx) => const CommentBoxScreen(),
         MapScreen.routeName: (ctx) => const MapScreen(),
-        PRVideoScreen.routeName: (ctx) => const PRVideoScreen(),
         ScheduleScreen.routeName: (ctx) => const ScheduleScreen(),
         ThemeSongScreen.routeName: (ctx) => const ThemeSongScreen(),
         //bunkasai
